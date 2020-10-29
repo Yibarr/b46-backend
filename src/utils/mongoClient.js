@@ -3,6 +3,7 @@ const { connect } = require('mongoose');
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 };
 
 const succesfulConnectionMsg = ({ connections }) => {

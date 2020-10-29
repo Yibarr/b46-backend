@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const celebrate = require('celebrate');
 const { logDate } = require('../middlewares/index.js');
 
 const app = express();
@@ -15,6 +16,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', require('../routers/index.js'));
+
+app.use(celebrate.errors());
 
 module.exports = {
   app,
