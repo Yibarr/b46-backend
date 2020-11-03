@@ -36,9 +36,10 @@ module.exports = {
   },
   updateOne: async (req, res, next) => {
     try {
-      const { body, params } = req;
-      const user = await UserService.findOne(params.id);
+      const { body, decoded } = req;
+      const user = await UserService.findOne(decoded.id);
       const updatedUser = await UserService.updateOne(user, body);
+      user.password = undefined;
       res.status(200).json({ message: 'Ok', payload: updatedUser });
     } catch (error) {
       next(error.message);
@@ -46,8 +47,8 @@ module.exports = {
   },
   deleteOne: async (req, res, next) => {
     try {
-      const { params } = req;
-      const deletedUser = await UserService.deleteOneById(params.id);
+      const { decoded } = req;
+      const deletedUser = await UserService.deleteOneById(decoded.id);
       res.status(200).json({ message: 'Deleted user', payload: deletedUser });
     } catch (error) {
       next(error.message);
