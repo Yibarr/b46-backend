@@ -1,4 +1,7 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const fs = require('fs');
+const APIError = require('../utils/error');
 
 module.exports = {
   logDate: (req, res, next) => {
@@ -16,5 +19,26 @@ module.exports = {
     } catch (error) {
       next(error.message);
     }
+  },
+  errorHandler: (error, req, res, next) => {
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, '/../../access.log'), { flags: 'a' });
+    accessLogStream.write(`${error.stack}\n`, 'utf-8');
+    accessLogStream.end();
+    if (error instanceof APIError) {
+      res
+        .status(error.statusCode)
+        .json({
+          statusCode: error.statusCode,
+          message: error.message,
+        });
+    } else {
+      res
+        .status(500)
+        .json({
+          statusCode: 500,
+          message: error.message,
+        });
+    }
+    next();
   },
 };
