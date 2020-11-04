@@ -8,8 +8,9 @@ const { logDate, errorHandler } = require('../middlewares/index.js');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const accesLog = path.join(__dirname, '/../../access.log');
+const accessLogStream = fs.createWriteStream(accesLog, { flags: 'a' });
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, '/../../access.log'), { flags: 'a' });
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(cors());
 app.use(logDate);
