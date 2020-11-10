@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Yibarr/b46-backend#readme",
   "dependencies": {
-    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "celebrate": "^13.0.3",
     "cors": "^2.8.5",
