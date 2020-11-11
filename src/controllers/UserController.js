@@ -30,6 +30,7 @@ module.exports = {
     try {
       const { params } = req;
       const user = await UserService.findOne(params.id);
+      user.password = undefined;
       res.status(200).json({ message: 'Ok', payload: user });
     } catch (error) {
       next(error);
