@@ -8,7 +8,7 @@ const UserValidator = require('../validators/UserValidator.js');
 const router = express.Router();
 
 // READ
-router.get('/users/:id', UserValidator.findOne, UserController.findOne);
+router.get('/users/:id', verifyToken, UserValidator.findOne, UserController.findOne);
 // UPDATE
 router.patch('/users', verifyToken, /* validator */ UserController.updateOne);
 // DELETE
