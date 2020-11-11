@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 const express = require('express');
 const { UserController } = require('../controllers/index.js');
-// const { UserValidator } = require('../validators/index.js');
+const { UserValidator } = require('../validators/index.js');
 const { verifyToken } = require('../middlewares/index.js');
-const UserValidator = require('../validators/UserValidator.js');
 
 const router = express.Router();
 

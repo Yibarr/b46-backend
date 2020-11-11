@@ -29,7 +29,7 @@ module.exports = {
   findOne: async (req, res, next) => {
     try {
       const { params } = req;
-      const user = await UserService.findOne(params.id);
+      const user = await UserService.findOne(params.id).populate('Posts');
       user.password = undefined;
       res.status(200).json({ message: 'Ok', payload: user });
     } catch (error) {
